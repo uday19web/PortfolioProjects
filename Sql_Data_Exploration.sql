@@ -1,24 +1,23 @@
-SELECT
-  *
-FROM
+SELECT  * FROM
   `my-data-project12345-360606.covid.Death`
 ORDER BY
   location,
   date
 LIMIT
-  10 --
-SELECT
-  -- * --
+  10 
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+SELECT * 
 FROM
-  `my-data-project12345-360606.covid.vaccination` --
+  `my-data-project12345-360606.covid.vaccination`
 ORDER BY
   location,
-  date --
+  date
 LIMIT
-  10 --
-SELECT
-  DATA that we are going TO be
-USING
+  10 
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+--  DATA that we are going TO be USING
 SELECT
   location,
   date,
@@ -32,7 +31,10 @@ WHERE
   continent IS NOT NULL
 ORDER BY
   1,
-  2 -- Looking AT total cases vs total deaths
+  2 
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+-- Looking AT total cases vs total deaths
 SELECT
   location,
   date,
@@ -46,7 +48,11 @@ WHERE
   AND continent IS NOT NULL
 ORDER BY
   1,
-  2 -- Looking AT Total Cases vs Population -- Shows What percentage OF population got Covid
+  2
+  
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+-- Looking AT Total Cases vs Population -- Shows What percentage OF population got Covid
 SELECT
   location,
   date,
@@ -60,9 +66,10 @@ WHERE
   AND continent IS NOT NULL
 ORDER BY
   1,
-  2 -- Looking AT countries
-WITH
-  highest infection rate compared TO population
+  2 
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+-- Looking AT countries with highest infection rate compared TO population
 SELECT
   location,
   population,
@@ -78,9 +85,10 @@ GROUP BY
   location,
   population
 ORDER BY
-  InfectedPopulationPercentage DESC -- Showing Countries
-WITH
-  Highest Death Count per Population
+  InfectedPopulationPercentage DESC 
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+-- Showing Countries with Highest Death Count per Population
 SELECT
   location,
   MAX(total_deaths) AS TotalDeathCount
@@ -91,7 +99,10 @@ WHERE
 GROUP BY
   location
 ORDER BY
-  2 DESC -- looking highest death count BY Continents
+  2 DESC 
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+-- looking highest death count BY Continents
 SELECT
   continent,
   MAX(total_deaths) AS TotalDeathCount
@@ -102,7 +113,10 @@ WHERE
 GROUP BY
   continent
 ORDER BY
-  2 DESC --Global Numbers
+  2 DESC 
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+--Global Numbers
 SELECT
   date,
   SUM(new_cases) AS SumOfNewCases,
@@ -116,7 +130,10 @@ GROUP BY
   date
 ORDER BY
   1,
-  2 -- Total global numbers
+  2 
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+-- Total global numbers
 SELECT
   SUM(new_cases) AS TotalCases,
   SUM(new_deaths) AS TotalDeaths,
@@ -129,7 +146,11 @@ ORDER BY
   1,
   2 -- joining the vaccination
   AND death dataset BY date
-  AND location -- looking AT total population vs vaccination
+  AND location 
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+-- looking AT total population vs vaccination
 SELECT
   dea.continent,
   dea.location,
@@ -150,7 +171,10 @@ ORDER BY
   2,
   3
 LIMIT
-  10 -- creating TEMP TABLE
+  10 
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+-- creating TEMP TABLE
 WITH
   PopVsVac AS (
   SELECT
@@ -172,6 +196,8 @@ WITH
   ORDER BY
     2,
     3 )
+ --------------------------------------------------------------------------------------------
+ --------------------------------------------------------------------------------------------
 SELECT
   *,
 FROM
@@ -196,8 +222,8 @@ WHERE
 ORDER BY
   2,
   3
-
---------------------------
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
 select 
   dea.continent as Continent, dea.location as Location, dea.date as Date, dea.population as Population, vac.new_vaccinations as New_vaccinations,
   sum(vac.new_vaccinations) over (partition by dea.location order by dea.location, dea.date) as PeopleVaccination
