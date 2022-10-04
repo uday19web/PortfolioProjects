@@ -33,6 +33,8 @@ ORDER BY
   1,
   2 
 --------------------------------------------------------------------------------------------
+[Big query saved link
+(https://console.cloud.google.com/bigquery?sq=984477199947:4e9fbaa8e76d47e2987947d8efc66cff)]
 --------------------------------------------------------------------------------------------
 -- Looking AT total cases vs total deaths
 SELECT
